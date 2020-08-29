@@ -40,7 +40,7 @@ async function getDailyStates() {
       statesData[currentEntry.state].push(currentEntry);
     });
     await setAsync('states', JSON.stringify(statesData));
-    console.log('Stored us daily into redis');
+    console.log('Stored states daily into redis');
   } catch (error) {
     console.log(error);
   }
