@@ -8,7 +8,7 @@ const setAsync = promisify(client.set).bind(client);
 const baseURL = 'https://covidtracking.com/api/us/daily';
 
 async function getDailyUS() {
-  console.log('Retrieving the past 14 days of COVID data');
+  console.log('Retrieving the past 14 days of US COVID data');
 
   let pastTwoWeeks = [];
   const { data } = await axios.get(baseURL);
@@ -18,4 +18,4 @@ async function getDailyUS() {
   console.log('Stored us daily into redis');
 }
 
-module.exports = fetchGithub;
+module.exports = getDailyUS;
