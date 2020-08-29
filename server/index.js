@@ -14,9 +14,10 @@ const PORT = 3001;
 app.use(cors());
 
 // api routes
-app.use('/us', require('./api'));
+app.use('/api', require('./api'));
 
 // static file-serving middleware
+app.use(express.static(path.join(__dirname, '../', 'client', 'build')));
 app.use(express.static(path.join(__dirname, '../', 'client', 'public')));
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
 
 // sends index.html
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', 'client', 'public/index.html'));
+  res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
 });
 
 // error handling
