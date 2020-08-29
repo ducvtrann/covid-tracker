@@ -3,11 +3,6 @@ const express = require('express');
 const redis = require('redis');
 const cors = require('cors');
 
-// Redis
-const { promisify } = require('util');
-const client = redis.createClient();
-const getAsync = promisify(client.get).bind(client);
-
 const app = express();
 const PORT = 3001;
 

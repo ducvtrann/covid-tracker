@@ -29,14 +29,14 @@ async function getDailyUS() {
     }
 
     const { data } = response;
-    let usData = [];
+    let usData = { us: [] };
 
     data.forEach((currentEntry) => {
       if (!last14DaysArray.includes(currentEntry.date)) {
         return;
       }
 
-      usData.push(currentEntry);
+      usData.us.push(currentEntry);
     });
     await setAsync('us', JSON.stringify(usData));
     console.log('Stored us daily into redis');
