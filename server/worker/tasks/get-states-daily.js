@@ -4,7 +4,6 @@ const moment = require('moment');
 const client = redis.createClient();
 
 const { promisify } = require('util');
-const { resolveNaptr } = require('dns');
 const setAsync = promisify(client.set).bind(client);
 
 const baseURL = 'https://api.covidtracking.com/v1/states/daily.json';
@@ -40,7 +39,7 @@ async function getDailyStates() {
       statesData[currentEntry.state] = statesData[currentEntry.state] || [];
       statesData[currentEntry.state].push(currentEntry);
     });
-    await setAsync('states-daily', JSON.stringify(statesData));
+    await setAsync('states', JSON.stringify(statesData));
     console.log('Stored us daily into redis');
   } catch (error) {
     console.log(error);
