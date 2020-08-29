@@ -1,29 +1,50 @@
 const axios = require('axios');
 const redis = require('redis');
+const moment = require('moment');
 const client = redis.createClient();
 
 const { promisify } = require('util');
+const { resolveNaptr } = require('dns');
 const setAsync = promisify(client.set).bind(client);
 
-const baseURL = 'https://covidtracking.com/api/states/daily';
+const baseURL = 'https://api.covidtracking.com/v1/states/daily.json';
 
 async function getDailyStates() {
   console.log('Retrieving the past 14 days of COVID data for each state');
 
-  let statesData = {};
-  const { data } = await axios.get(baseURL);
+  try {
+    const today = moment().format('YYYYMMDD');
 
-  for (let i = 0; i < 784; i++) {
-    const currentState = data[i];
-    if (statesData[currentState.state]) {
-      statesData[currentState.state].push(currentState);
-    } else {
-      statesData[currentState.state] = [currentState];
+    const last14DaysArray = Array.from({ length: 14 }, (_, index) =>
+      Number(
+        moment(today)
+          .subtract(index + 1, 'days')
+          .format('YYYYMMDD')
+      )
+    );
+
+    const response = await axios.get(baseURL);
+
+    if (!response || !Array.isArray(response.data) || !response.data.length) {
+      throw new Error('Data was empty in response');
     }
+
+    const { data } = response;
+    let statesData = {};
+
+    data.forEach((currentEntry) => {
+      if (!last14DaysArray.includes(currentEntry.date) || !currentEntry.state) {
+        return;
+      }
+
+      statesData[currentEntry.state] = statesData[currentEntry.state] || [];
+      statesData[currentEntry.state].push(currentEntry);
+    });
+    await setAsync('states-daily', JSON.stringify(statesData));
+    console.log('Stored us daily into redis');
+  } catch (error) {
+    console.log(error);
   }
-  await setAsync('states-daily', JSON.stringify(statesData));
-  console.log('Stored us daily into redis');
 }
 
-getDailyStates();
-// module.exports = getDailyStates;
+module.exports = getDailyStates;
