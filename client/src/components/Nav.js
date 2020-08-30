@@ -1,11 +1,10 @@
 import React from 'react';
 
 export const Nav = ({ options, activeCovid, setActiveCovid }) => {
-  console.log(options);
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand">COVID-19 Tracker</a>
+        <span className="navbar-brand">COVID-19 Tracker</span>
         <form className="d-flex">
           <div className="btn-group">
             <button
@@ -24,7 +23,7 @@ export const Nav = ({ options, activeCovid, setActiveCovid }) => {
                     setActiveCovid(option);
                   }}
                 >
-                  <a className="dropdown-item">{option}</a>
+                  <span className="dropdown-item">{option}</span>
                 </li>
               ))}
             </ul>

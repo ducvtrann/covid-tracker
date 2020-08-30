@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Nav } from './components/Nav';
+import { Main } from './components/Main';
 
 import './App.css';
 
@@ -13,7 +14,7 @@ async function getCovidData(setCovid) {
 
 export const App = () => {
   const [covid, setCovid] = useState({});
-  const [activeCovid, setActiveCovid] = useState('US');
+  const [activeCovid, setActiveCovid] = useState('us');
 
   useEffect(() => {
     getCovidData(setCovid);
@@ -21,13 +22,16 @@ export const App = () => {
   return (
     <div className="container bg-soft">
       <div className="row">
-        <div className="col">
-          <Nav
-            options={Object.keys(covid)}
-            activeCovid={activeCovid}
-            setActiveCovid={setActiveCovid}
-          />
-        </div>
+        {Object.keys(covid).length && (
+          <div className="col">
+            <Nav
+              options={Object.keys(covid)}
+              activeCovid={activeCovid}
+              setActiveCovid={setActiveCovid}
+            />
+            <Main covid={covid} activeCovid={activeCovid} />
+          </div>
+        )}
       </div>
     </div>
   );
