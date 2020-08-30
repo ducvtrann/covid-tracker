@@ -14,7 +14,7 @@ async function getCovidData(setCovid) {
 
 export const App = () => {
   const [covid, setCovid] = useState({});
-  const [activeCovid, setActiveCovid] = useState('us');
+  const [activeCovid, setActiveCovid] = useState('US');
 
   useEffect(() => {
     getCovidData(setCovid);
@@ -22,7 +22,7 @@ export const App = () => {
   return (
     <div className="container bg-soft">
       <div className="row">
-        {Object.keys(covid).length && (
+        {Object.keys(covid).length > 0 && (
           <div className="col">
             <Nav
               options={Object.keys(covid)}

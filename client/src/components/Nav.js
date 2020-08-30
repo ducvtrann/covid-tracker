@@ -4,7 +4,7 @@ export const Nav = ({ options, activeCovid, setActiveCovid }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container-fluid">
-        <span className="navbar-brand">COVID-19 Tracker</span>
+        <h1 className="navbar-brand">COVID-19 Tracker</h1>
         <form className="d-flex">
           <div className="btn-group">
             <button

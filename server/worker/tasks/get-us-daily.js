@@ -36,7 +36,7 @@ async function getDailyUS() {
         return;
       }
 
-      usData.us.push(currentEntry);
+      usData.US.push(currentEntry);
     });
     await setAsync('us', JSON.stringify(usData));
     console.log('Stored us daily into redis');
