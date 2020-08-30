@@ -1,3 +1,3 @@
-export const calculatePercentage = (partialValue, totalValue) => {
-  return (partialValue / totalValue) * 100;
+export const calculatePercentage = (newValue, oldValue) => {
+  return ((newValue / oldValue - 1) * 100).toFixed(2);
 };

@@ -4,6 +4,8 @@ import { calculatePercentage } from '../helpers';
 export const Cards = ({ activeCovid }) => {
   console.log('active', activeCovid);
   const recentData = activeCovid[0];
+  const lastData = activeCovid[activeCovid.length - 1];
+
   console.log(recentData);
   return (
     <div className="row justify-content-center mb-3">
@@ -13,7 +15,10 @@ export const Cards = ({ activeCovid }) => {
           <div className="card-body">
             <p>{`Total Cases - ${recentData.positive}`}</p>
             <p>{`New Cases Today - ${recentData.positiveIncrease}`}</p>
-            <p>{`Percent Increase - Missing`}</p>
+            <p>{`Percent Increase - ${calculatePercentage(
+              recentData.positive,
+              lastData.positive
+            )}`}</p>
           </div>
         </div>
       </div>
@@ -23,7 +28,10 @@ export const Cards = ({ activeCovid }) => {
           <div className="card-body">
             <p>{`Total Tests - ${recentData.totalTestResults}`}</p>
             <p>{`New Tests Today - ${recentData.totalTestResultsIncrease}`}</p>
-            <p>{`Percent Increase - Missing`}</p>
+            <p>{`Percent Increase - ${calculatePercentage(
+              recentData.totalTestResults,
+              lastData.totalTestResults
+            )}`}</p>
           </div>
         </div>
       </div>
