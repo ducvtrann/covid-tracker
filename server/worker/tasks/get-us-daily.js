@@ -29,7 +29,7 @@ async function getDailyUS() {
     }
 
     const { data } = response;
-    let usData = { us: [] };
+    let usData = { US: [] };
 
     data.forEach((currentEntry) => {
       if (!last14DaysArray.includes(currentEntry.date)) {
