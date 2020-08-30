@@ -2,11 +2,9 @@ import React from 'react';
 import { calculatePercentage } from '../helpers';
 
 export const Cards = ({ activeCovid }) => {
-  console.log('active', activeCovid);
   const recentData = activeCovid[0];
   const lastData = activeCovid[activeCovid.length - 1];
 
-  console.log(recentData);
   return (
     <div className="row justify-content-center mb-3">
       <div className="col-12 col-sm-3">
@@ -15,7 +13,7 @@ export const Cards = ({ activeCovid }) => {
           <div className="card-body">
             <p>{`Total Cases - ${recentData.positive}`}</p>
             <p>{`New Cases Today - ${recentData.positiveIncrease}`}</p>
-            <p>{`Percent Increase - ${calculatePercentage(
+            <p>{`Percent Increase (2W) - ${calculatePercentage(
               recentData.positive,
               lastData.positive
             )}`}</p>
@@ -28,7 +26,7 @@ export const Cards = ({ activeCovid }) => {
           <div className="card-body">
             <p>{`Total Tests - ${recentData.totalTestResults}`}</p>
             <p>{`New Tests Today - ${recentData.totalTestResultsIncrease}`}</p>
-            <p>{`Percent Increase - ${calculatePercentage(
+            <p>{`Percent Increase (2W) - ${calculatePercentage(
               recentData.totalTestResults,
               lastData.totalTestResults
             )}`}</p>
