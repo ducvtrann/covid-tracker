@@ -9,7 +9,9 @@ async function getCovidData(setCovid) {
   try {
     const { data } = await axios.get('/api/us');
     setCovid(data);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const App = () => {
