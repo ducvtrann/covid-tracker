@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Nav = ({ options }) => {
+export const Nav = ({ options, activeCovid, setActiveCovid }) => {
   console.log(options);
   return (
     <nav className="navbar navbar-light bg-light">
@@ -13,14 +13,18 @@ export const Nav = ({ options }) => {
               className="btn btn-primary dropdown-toggle"
               data-toggle="dropdown"
             >
-              Action
+              {activeCovid}
             </button>
             <ul className="dropdown-menu">
               {options.map((option, idx) => (
-                <li key={idx}>
-                  <a className="dropdown-item" href="#">
-                    {option}
-                  </a>
+                <li
+                  key={idx}
+                  onClick={() => {
+                    console.log(option);
+                    setActiveCovid(option);
+                  }}
+                >
+                  <a className="dropdown-item">{option}</a>
                 </li>
               ))}
             </ul>

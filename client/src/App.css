@@ -1,3 +1,7 @@
+.bg-soft {
+  background-color: #f5f8fb !important;
+}
+
 .dropdown-menu {
   overflow-y: scroll;
   max-height: 200px;
