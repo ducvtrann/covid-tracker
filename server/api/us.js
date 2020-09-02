@@ -1,8 +1,16 @@
 const router = require('express').Router();
+var url = require('url');
+var redis = require('redis');
 
-// Redis
-const redis = require('redis');
-const client = redis.createClient();
+if (process.env.NODE_ENV === 'production') {
+  var redisURL = url.parse(process.env.REDISCLOUD_URL);
+  var client = redis.createClient(redisURL.port, redisURL.hostname, {
+    no_ready_check: true,
+  });
+  client.auth(redisURL.auth.split(':')[1]);
+} else {
+  var client = redis.createClient();
+}
 
 const { promisify } = require('util');
 const getAsync = promisify(client.get).bind(client);
