@@ -1,19 +1,15 @@
 const axios = require('axios');
-const redis = require('redis');
 const moment = require('moment');
-var url = require('url');
-var redis = require('redis');
+const url = require('url');
 
-if (process.env.NODE_ENV === 'production') {
-  var redisURL = url.parse(process.env.REDISCLOUD_URL);
-  var client = redis.createClient(redisURL.port, redisURL.hostname, {
-    no_ready_check: true,
-  });
-  client.auth(redisURL.auth.split(':')[1]);
+if (process.env.REDIS_URL) {
+  const rtg = require('url').parse(process.env.REDIS_URL);
+  const redis = require('redis').createClient(rtg.port, rtg.hostname);
+
+  redis.auth(rtg.auth.split(':')[1]);
 } else {
-  var client = redis.createClient();
+  const redis = require('redis').createClient();
 }
-
 const { promisify } = require('util');
 const setAsync = promisify(client.set).bind(client);
 
