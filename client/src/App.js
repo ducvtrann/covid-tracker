@@ -7,9 +7,7 @@ import './App.css';
 
 async function getCovidData(setCovid) {
   try {
-    const { data } = await axios.get(
-      'https://ez-covid-tracker.herokuapp.com/api/us'
-    );
+    const { data } = await axios.get('/api/us');
     setCovid(data);
   } catch (error) {
     console.log(error);
