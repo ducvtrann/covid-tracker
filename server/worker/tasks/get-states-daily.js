@@ -2,13 +2,14 @@ const axios = require('axios');
 const moment = require('moment');
 const url = require('url');
 
+let client;
 if (process.env.REDIS_URL) {
   const rtg = require('url').parse(process.env.REDIS_URL);
-  const redis = require('redis').createClient(rtg.port, rtg.hostname);
+  client = require('redis').createClient(rtg.port, rtg.hostname);
 
   redis.auth(rtg.auth.split(':')[1]);
 } else {
-  const redis = require('redis').createClient();
+  client = require('redis').createClient();
 }
 
 const { promisify } = require('util');
