@@ -1,19 +1,9 @@
 const path = require('path');
 const express = require('express');
-// const redis = require('redis');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-if (process.env.REDISTOGO_URL) {
-  const rtg = require('url').parse(process.env.REDISTOGO_URL);
-  const redis = require('redis').createClient(rtg.port, rtg.hostname);
-
-  redis.auth(rtg.auth.split(':')[1]);
-} else {
-  const redis = require('redis').createClient();
-}
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 

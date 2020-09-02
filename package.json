@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "dev-start": "nodemon server",
+    "dev": "nodemon server",
     "build": "cd client && npm install && npm run build"
   },
   "author": "",
@@ -16,7 +16,6 @@
     "cors": "^2.8.5",
     "cron": "^1.8.2",
     "express": "^4.17.1",
-    "ioredis": "^4.17.3",
     "moment": "^2.27.0",
     "path": "^0.12.7",
     "popper": "^1.0.1",
