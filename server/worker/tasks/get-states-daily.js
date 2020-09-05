@@ -1,19 +1,6 @@
 const axios = require('axios');
 const moment = require('moment');
-const url = require('url');
-
-let client;
-if (process.env.REDIS_URL) {
-  const rtg = require('url').parse(process.env.REDIS_URL);
-  client = require('redis').createClient(rtg.port, rtg.hostname);
-
-  client.auth(rtg.auth.split(':')[1]);
-} else {
-  client = require('redis').createClient();
-}
-
-const { promisify } = require('util');
-const setAsync = promisify(client.set).bind(client);
+const { setAsync } = require('../../db');
 
 const baseURL = 'https://api.covidtracking.com/v1/states/daily.json';
 

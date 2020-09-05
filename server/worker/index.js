@@ -3,10 +3,6 @@ const { CronJob } = require('cron');
 const getUSDaily = require('./tasks/get-us-daily');
 const getStatesDaily = require('./tasks/get-states-daily');
 
-//Start the job immediately
-getUSDaily();
-getStatesDaily();
-
 const getUSDailyJob = new CronJob(
   '* * * * *',
   getUSDaily,

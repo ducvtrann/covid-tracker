@@ -1,19 +1,5 @@
 const router = require('express').Router();
-const url = require('url');
-
-let client;
-if (process.env.REDIS_URL) {
-  const rtg = require('url').parse(process.env.REDIS_URL);
-  client = require('redis').createClient(rtg.port, rtg.hostname);
-
-  client.auth(rtg.auth.split(':')[1]);
-} else {
-  client = require('redis').createClient();
-}
-
-const { promisify } = require('util');
-const getAsync = promisify(client.get).bind(client);
-
+const { getAsync } = require('../db');
 // GET US data
 router.get('/', async (req, res, next) => {
   try {
