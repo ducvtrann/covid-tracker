@@ -9,4 +9,5 @@ A simple covid-19 tracker to see only critical information without any distracti
 - DB: Redis
 - Scheduler: Cron
 
+## Screenshot
 ![screenshot](images/sample.png)
