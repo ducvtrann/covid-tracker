@@ -4,7 +4,7 @@ const getUSDaily = require('./tasks/get-us-daily');
 const getStatesDaily = require('./tasks/get-states-daily');
 
 const getUSDailyJob = new CronJob(
-  '* * * * *',
+  '0 0 * * *',
   getUSDaily,
   null,
   true,
@@ -12,7 +12,7 @@ const getUSDailyJob = new CronJob(
 );
 
 const getStatesDailyJob = new CronJob(
-  '* * * * *',
+  '0 0 * * *',
   getStatesDaily,
   null,
   true,
